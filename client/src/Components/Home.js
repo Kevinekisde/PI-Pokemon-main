@@ -122,8 +122,11 @@ const Home = () => {
               paginado={paginado}
             ></Paginado>
           </> :
+          <div className={s.pokeballContainer}>
+
           <div className={s.div}>
             <div className={s.pokeball}></div>
+          </div>
           </div>
       }
 

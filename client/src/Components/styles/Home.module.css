@@ -103,7 +103,7 @@ body{
 .pokeball {
   animation-duration: 1s;
   animation-fill-mode: both;
-  animation-iteration-count: 3;
+  animation-iteration-count: 6;
   animation-name: shake;
 }
 
@@ -142,4 +142,13 @@ h4{
 .selectBoxes{
   display: flex;
   margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+.pokeballContainer{
+  margin-top: 180px;
+  display: flex;
+  justify-content:center;
+  align-items:center;
 }

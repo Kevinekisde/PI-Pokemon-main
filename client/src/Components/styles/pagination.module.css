@@ -32,4 +32,6 @@
     line-height: 30px;
 }
 
-
+.paginado li a:hover{
+    color: crimson;
+}
