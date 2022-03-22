@@ -13,14 +13,15 @@ body{
     padding: 20px 0;
   }
 .sectionFlex {
+  position: relative;
     display: flex;
     flex-direction: row;
-
-    /* change margin left for deploy */
     flex-wrap: wrap;
-    width: 58%;
+    width: 100%;
     justify-items: center;
     margin-top: -50px;
+    justify-content: center;
+    right: 51px;
 }
 
 .button {
@@ -62,3 +63,83 @@ body{
  .button:hover::before {
   width: 100%;
  }
+
+
+ .pokeball {
+  box-sizing: border-box;
+  border: 10px solid #262122;
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+  margin: 0 auto;
+  background: linear-gradient( 150deg, #BA0C2F 0%, #BA0C2F 48%, #262122 48%, #262122 52%, #FFF 52%, #FFF 100%);
+}
+
+.pokeball:before,
+.pokeball:after {
+  content: " ";
+  border-radius: 100%;
+  display: block;
+  position: absolute;
+}
+
+.pokeball:before {
+  background: #262122;
+  width: 80px;
+  height: 80px;
+  margin-top: 75px;
+  margin-left: 75px;
+}
+
+.pokeball:after {
+  background: #fff;
+  width: 50px;
+  height: 50px;
+  margin-top: 70px;
+  margin-left: 70px;
+  border: double 20px #262122;
+}
+
+.pokeball {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-iteration-count: 3;
+  animation-name: shake;
+}
+
+@keyframes shake {
+  from {
+    transform: none;
+  }
+  20% {
+    transform: translate3d(-20%, 0, 0) rotate3d(0, 0, 1, -10deg);
+  }
+  40% {
+    transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 5deg);
+  }
+  50% {
+    transform: translate3d(-10%, 0, 0) rotate3d(0, 0, 1, -10deg);
+  }
+  60% {
+    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 50deg);
+  }
+  to {
+    transform: none;
+  }
+}
+
+
+.div{
+  justify-content:center;
+  align-items:center;
+}
+
+
+h4{
+  color: aliceblue;
+}
+
+.selectBoxes{
+  display: flex;
+  margin-top: 20px;
+}

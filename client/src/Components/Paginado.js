@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import s from './styles/pagination.module.css'
 
@@ -12,17 +13,14 @@ export default function Paginado ({characterPerPage, allCharacters,paginado}) {
     return(
         <nav>
             <ul className={s.paginado}>
-            <a>⬅</a>
                 {pageNumbers &&
                 pageNumbers.map(number =>{
                     return(
                     <li className="number" key={number}>
                     <a onClick={() => paginado(number)}>{number}</a>
                     </li>
-
                     )
                 })}
-                <a>➡</a>
             </ul>
         </nav>
     )

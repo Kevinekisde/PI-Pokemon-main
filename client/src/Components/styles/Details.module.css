@@ -21,6 +21,7 @@
     display:grid;
     justify-items: center;
     grid-template-columns: repeat(3,1fr);
+    font-size: 12px;
 
 }
 
@@ -34,8 +35,10 @@
 }
 
 .textimg > img {
+    margin-top:20px;
     width:80px;
     height:80px;
+    margin-bottom:20px;
 }
 
 

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getPokemon = () => {
   return async function (dispatch) {
-    const pokemon = await axios.get("http://127.0.0.1:3001/pokemons");
+    const pokemon = await axios.get("/pokemons");
     return dispatch({
       type: "GET_POKEMON",
       payload: pokemon.data,
@@ -14,7 +14,7 @@ export const getPokemon = () => {
 
 export const getTypes = () => {
   return async function (dispatch) {
-    const types = await axios.get("http://127.0.0.1:3001/types");
+    const types = await axios.get("/types");
     return dispatch({
       type: "GET_TYPES",
       payload: types.data,
@@ -25,7 +25,7 @@ export const getTypes = () => {
 
 export function postPokemon(payload) {
   return async function (dispatch) {
-    const json = await axios.post("http://127.0.0.1:3001/pokemons" ,payload);
+    const json = await axios.post("/pokemons" ,payload);
     return json
   }
 }
@@ -41,7 +41,7 @@ export const searchPokemon = (name) => {
 export function getDetail(id){
   return async function(dispatch){
       try{
-          var json = await axios.get(`http://127.0.0.1:3001/pokemons/${id}`)
+          var json = await axios.get(`/pokemons/${id}`)
           return dispatch({
               type: 'GET_DETAILS',
               payload: json.data
@@ -51,4 +51,29 @@ export function getDetail(id){
       }
   }
 
+}
+
+
+
+
+export function filterCreated(payload){
+  return {
+      type: 'FILTER_CREATED',
+      payload
+  }
+}
+
+export function orderByName(payload){
+  return{
+      type: 'ORDER_BY_NAME',
+      payload
+  }
+}
+
+
+export function orderByAttack(payload){
+  return{
+    type: 'ORDER_BY_ATTACK',
+    payload
+  }
 }

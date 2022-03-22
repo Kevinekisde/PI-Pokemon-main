@@ -12,17 +12,16 @@ const Details = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getDetail(id))
-    }, [])
+    }, [dispatch, id])
 
     const myPokemon = useSelector((state) => state.detail)
     console.log(myPokemon)
     return (
         <div className={s.container}>
-
             {
                 myPokemon.length > 0 ?
                     <div className={s.card}>
-                        <Link to="/home"><button className={s.button}>⬅Volver</button></Link>
+                        <Link to="/home"><button className={s.button}>Volver</button></Link>
                         <div className={s.textimg}>
                             <h1>{myPokemon[0].name}</h1>
                             <h2>Id: {myPokemon[0].id} </h2>
@@ -32,11 +31,10 @@ const Details = () => {
                             <h2>Hp: {myPokemon[0].hp}</h2>
                             <h2>Weight: {myPokemon[0].weight}</h2>
                             <h2>Height: {myPokemon[0].height}</h2>
-                            <h2>Attack: {myPokemon[0].attacker}</h2>
+                            <h2>Attack: {myPokemon[0].attack}</h2>
                             <h2>Defense: {myPokemon[0].defense}</h2>
-                            <h2>Speed{myPokemon[0].speed}</h2>
+                            <h2>Speed: {myPokemon[0].speed}</h2>
                         </div>
-
                         <div className={s.type}>
                             {!myPokemon[0].createdInDb ?
                                 myPokemon[0].types.map((type) => {
