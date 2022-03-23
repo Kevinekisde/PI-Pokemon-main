@@ -13,15 +13,16 @@ body{
     padding: 20px 0;
   }
 .sectionFlex {
-  position: relative;
-    display: flex;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100%;
+    width: 60%;
     justify-items: center;
     margin-top: -50px;
     justify-content: center;
-    right: 51px;
+    right: 8vh;
 }
 
 .button {
