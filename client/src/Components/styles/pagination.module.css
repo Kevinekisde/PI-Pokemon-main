@@ -35,3 +35,8 @@
 .paginado li a:hover{
     color: crimson;
 }
+
+.paginado li a:visited{
+    color: crimson;
+}
+

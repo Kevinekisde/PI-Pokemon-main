@@ -78,15 +78,15 @@ const Home = () => {
             <main className={s.mainFlex}>
               <h4>Filtros:</h4>
               <div className={s.selectBoxes}>
-              <select onClick={e => handleSortedName(e)}>
+              <select onChange={e => handleSortedName(e)}>
                 <option value="des">Descendente</option>
                 <option value="asc">Ascendente</option>
               </select>
-              <select onClick={e => handleSortedAttack(e)}>
+              <select onChange={e => handleSortedAttack(e)}>
                 <option value="mayorToMinus">Menor a Mayor</option>
                 <option value="minusToMayus">Mayor a menor</option>
               </select>
-              <select onClick={e => handleFilterCreated(e)}>
+              <select onChange={e => handleFilterCreated(e)}>
                 <option value="All">Todos</option>
                 <option value="created">Creados</option>
                 <option value="api">Api</option>
