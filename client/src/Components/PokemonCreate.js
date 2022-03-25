@@ -255,6 +255,7 @@ const PokemonCreate = () => {
                     {input.types.map(el =>
                         <div className={s.type}>
                             <p>{el}</p>
+                            
                             <button className={s.buttondel} onClick={() => handleDelete(el)}>Borrar</button>
                         </div>)}
                 </div>
