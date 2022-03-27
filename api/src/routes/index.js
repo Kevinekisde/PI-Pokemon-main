@@ -97,7 +97,7 @@ router.get('/pokemons', async (req, res) => {
         let pokemonName = await pokemonTotal.filter(el => el.name.toLowerCase().includes(name.toLowerCase()))
         pokemonName.length ?
             res.status(200).send(pokemonName) :
-            res.status(404).send("El Pokemon no existe")
+            res.status(404).redirect("/")
     }else{
         res.status(200).send(pokemonTotal)
     }
