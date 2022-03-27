@@ -79,7 +79,7 @@ const Home = () => {
               <h4>Filtros:</h4>
               <div className={s.selectBoxes}>
               <select onChange={e => handleSortedName(e)}>
-                <option value="">Ordenar por nombre</option>
+                <option value="">Ordenar por Nombre</option>
                 <option value="des">Descendente</option>
                 <option value="asc">Ascendente</option>
               </select>
