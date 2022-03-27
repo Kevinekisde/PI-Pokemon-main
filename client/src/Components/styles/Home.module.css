@@ -144,7 +144,8 @@ h4{
   display: flex;
   margin-top: 20px;
   margin-bottom: 20px;
-  height: 2vh;
+  gap: 10px;
+  height: 3vh;
 }
 
 
