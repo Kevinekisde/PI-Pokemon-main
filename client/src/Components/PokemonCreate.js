@@ -8,20 +8,19 @@ function validate(input) {
 
     const reg = new RegExp('^[0-9]+$');
     let errors = {};
-    
-    if (!input.name || input.name.match(reg)) {
+    if (!input.name || input.name.match(reg) || input.name.length < 1) {
         errors.name = "Se requiere un nombre valido"
     } else if (!input.hp || !input.hp.match(reg)) { 
         errors.hp = "Se requiere un valor numerico de vida"
-    } else if (!input.attack || !input.attack.match(reg) ) {
+    } else if (!input.attack || !input.attack.match(reg) || input.attack.length > 3 ) {
         errors.attack = "hace falta un valor numerico de ataque"
-    } else if (!input.defense || !input.defense.match(reg) ) {
+    } else if (!input.defense || !input.defense.match(reg) || input.defense.length > 3) {
         errors.defense = "hace falta un valor numerico de defensa"
-    } else if (!input.speed || !input.speed.match(reg)) {
-        errors.speed = "hace falta un valor numerico de velocidad"
-    } else if (!input.weight || !input.weight.match(reg)) {
+    } else if (!input.speed || !input.speed.match(reg) || !input.speed.length > 3){
+        errors.speed = "hace falta un valor numerico de velocidad menor a 1000"
+    } else if (!input.weight || !input.weight.match(reg) || !input.weight.length > 3) {
         errors.weight = "hace falta un valor numerico de Peso"
-    } else if (!input.height || !input.height.match(reg)) {
+    } else if (!input.height || !input.height.match(reg) || input.height.length > 3) {
         errors.height = "hace falta un valor numerico de Altura"
     }
     
