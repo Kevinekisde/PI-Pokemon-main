@@ -79,10 +79,12 @@ const Home = () => {
               <h4>Filtros:</h4>
               <div className={s.selectBoxes}>
               <select onChange={e => handleSortedName(e)}>
+                <option value="">Ordenar por nombre</option>
                 <option value="des">Descendente</option>
                 <option value="asc">Ascendente</option>
               </select>
               <select onChange={e => handleSortedAttack(e)}>
+              <option value="">Ordenar por ataque</option>
                 <option value="mayorToMinus">Menor a Mayor</option>
                 <option value="minusToMayus">Mayor a menor</option>
               </select>

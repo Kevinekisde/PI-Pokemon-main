@@ -166,7 +166,7 @@ router.post('/pokemons', async (req, res) => {
 
         let typesIndb = await Type.findAll({where:{name:types}})
         newPokemon.addType(typesIndb)
-        res.send("Personaje creado con exito")
+        res.status(200).send("Personaje creado con exito")
 
 
     } catch (error) {
