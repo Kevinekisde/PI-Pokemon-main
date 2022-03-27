@@ -13,32 +13,31 @@ const router = Router();
 const getApiInfo = async () => {
 
     try {
-
-        const apiInfo = await axios("https://pokeapi.co/api/v2/pokemon?limit=151")
-        const promises = apiInfo.data.results.map(poke => axios.get(poke.url))
-        const pokePromises = await axios.all(promises)
-        const pokemon = pokePromises.map(poke => {
-            return {
-                id: poke.data.id,
-                name: poke.data.name,
-                height: poke.data.height,
-                hp: poke.data.stats[0].base_stat,
-                attack: poke.data.stats[1].base_stat,
-                defense: poke.data.stats[3].base_stat,
-                speed: poke.data.stats[5].base_stat,
-                weight: poke.data.weight,
-                types: poke.data.types.map(el => el.type.name),
-                img: poke.data.sprites.versions["generation-v"]["black-white"].animated
-                    .front_default,
-                backImg:
-                    poke.data.sprites.versions["generation-v"]["black-white"].animated
-                        .back_default,
-            }
-        })
+        const apiInfo = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=40");
+        const promises = apiInfo.data.results.map((p) => axios.get(p.url));
+        const pokePromises = await axios.all(promises);
+        const pokemon = pokePromises.map((p) => {
+          return {
+            id: p.data.id,
+            name: p.data.name,
+            height: p.data.height,
+            hp: p.data.stats[0].base_stat,
+            attack: p.data.stats[1].base_stat,
+            defense: p.data.stats[2].base_stat,
+            speed: p.data.stats[5].base_stat,
+            weight: p.data.weight,
+            types: p.data.types.map((e) => e.type.name),
+            img: p.data.sprites.versions["generation-v"]["black-white"].animated
+              .front_default,
+            backImg:
+              p.data.sprites.versions["generation-v"]["black-white"].animated
+                .back_default,
+          };
+        });
         return pokemon;
-    } catch (e) {
-        console.error("No se ha podido encontrar pokemon: ", e)
-    }
+      } catch (error) {
+        console.log(error);
+      }
 }
 
 

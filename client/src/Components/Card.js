@@ -2,6 +2,7 @@ import React from "react";
 import Classes from './styles/Card.module.css';
 import { Link } from "react-router-dom";
 
+
 const Card = ({ name, img, types, id, createdInDb }) => {
   return (
 
@@ -13,7 +14,7 @@ const Card = ({ name, img, types, id, createdInDb }) => {
       <div className={Classes.rest}>
         <Link to={`/home/${id}`}>
           <div className={Classes.img}>
-            <img src={img} alt="Pokemon" />
+            <img src={img} onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/PkgfWU08_WU/mqdefault.jpg';" alt="Pokemon"/>
           </div>
         </Link>
 
