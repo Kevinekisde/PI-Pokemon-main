@@ -15,11 +15,10 @@ const Details = () => {
     }, [dispatch, id])
 
     const myPokemon = useSelector((state) => state.detail)
-    console.log(myPokemon)
     return (
         <div className={s.container}>
             {
-                myPokemon.length > 0 ?
+              myPokemon.length > 0 ?
                     <div className={s.card}>
                         <Link to="/home"><button className={s.button}>Volver</button></Link>
                         <div className={s.textimg}>
@@ -43,6 +42,7 @@ const Details = () => {
                                 myPokemon[0].types.map((type) => {
                                     return (
                                         <img
+                                            key={type}
                                             alt="Type"
                                             src={require(`./typeImage/${type}.png`).default}
                                         />

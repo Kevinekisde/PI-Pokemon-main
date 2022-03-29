@@ -27,7 +27,7 @@ const Home = () => {
   const [characterPerPage, /*setCharacterPerPage*/] = useState(12) //! Cuantos persoanje msotrare por pagina
   const indexOfLastCharacter = currentPage * characterPerPage //! el ultimo personaje de mi pagina
   const indexOfFirstCharacter = indexOfLastCharacter - characterPerPage //! MI primer personaje
-  const currentCharacters = allPokemon.slice(indexOfFirstCharacter, indexOfLastCharacter) //! corta el array desde mi primer personaje al ultimo
+  const currentPokemon = allPokemon.slice(indexOfFirstCharacter, indexOfLastCharacter) //! corta el array desde mi primer personaje al ultimo
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber) //! Cambio el estado de la pagina para ir a la siguiente
@@ -49,6 +49,9 @@ const Home = () => {
     dispatch(searchPokemon(value))
     setCurrentPage(1)
   }
+
+
+
   function handleFilterCreated(e) {
     dispatch(filterCreated(e.target.value))
   }
@@ -73,33 +76,31 @@ const Home = () => {
       {
         allPokemon.length ?
           <>
-          
             <Nav onSearch={handleSearch}></Nav>
             <main className={s.mainFlex}>
               <h4>Filtros:</h4>
               <div className={s.selectBoxes}>
-              <select onChange={e => handleSortedName(e)}>
-                <option>Ordenar por Nombre</option>
-                <option value="des">Descendente</option>
-                <option value="asc">Ascendente</option>
-              </select>
-              <select onChange={e => handleSortedAttack(e)}>
-              <option>Ordenar por ataque</option>
-                <option value="mayorToMinus">Menor a Mayor</option>
-                <option value="minusToMayus">Mayor a menor</option>
-              </select>
-              <select onChange={e => handleFilterCreated(e)}>
-                <option value="All">Todos</option>
-                <option value="created">Creados</option>
-                <option value="api">Api</option>
-              </select>
+                <select onChange={e => handleSortedName(e)}>
+                  <option>Ordenar por Nombre</option>
+                  <option value="des">Descendente</option>
+                  <option value="asc">Ascendente</option>
+                </select>
+                <select onChange={e => handleSortedAttack(e)}>
+                  <option>Ordenar por ataque</option>
+                  <option value="mayorToMinus">Menor a Mayor</option>
+                  <option value="minusToMayus">Mayor a menor</option>
+                </select>
+                <select onChange={e => handleFilterCreated(e)}>
+                  <option value="All">Todos</option>
+                  <option value="created">Creados</option>
+                  <option value="api">Api</option>
+                </select>
               </div>
               <button className={s.button} onClick={handleClick}>Restablecer</button>
               <div className={s.sectionFlex}>
-                {currentCharacters?.map(pokemon => {
+                {currentPokemon.map(pokemon => {
                   return (
-                    <div className={s.card}  key={pokemon.id}>
-
+                    <div className={s.card} key={pokemon.id}>
                       <Link to={"/home/" + pokemon.id}>
                         <Card
                           img={pokemon.img}
@@ -112,23 +113,23 @@ const Home = () => {
                       </Link>
                     </div>
                   )
-                })
-                }
+                })}
               </div>
-
             </main>
-
             <Paginado
               characterPerPage={characterPerPage}
               allCharacters={allPokemon.length}
               paginado={paginado}
             ></Paginado>
-          </> :
-          <div className={s.pokeballContainer}>
-
-          <div className={s.div}>
-            <div className={s.pokeball}></div>
-          </div>
+          </>
+          :
+          <div>
+            <div className={s.pokeballContainer}>
+              <div className={s.div}>
+                <div className={s.pokeball}></div>
+                <h1>Cargando...</h1>
+              </div>
+            </div>
           </div>
       }
 

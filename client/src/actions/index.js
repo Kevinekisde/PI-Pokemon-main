@@ -44,13 +44,18 @@ export function getDetail(id){
           var json = await axios.get(`/pokemons/${id}`)
           return dispatch({
               type: 'GET_DETAILS',
-              payload: json.data
+              payload: json.data,
+              
           })
       }catch(error){
-          console.log(error)
+        const err = error 
+        if (err.response) {
+           console.log(err.response.status)
+           console.log(err.response.data)
+           window.location.replace("/error")
       }
   }
-
+}
 }
 
 

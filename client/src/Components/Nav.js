@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import s from './styles/Nav.module.css'
 
 
 const Nav = ({onSearch}) => {
   const [value, setValue] = useState("");
+  const allPokemon = useSelector((state) => state.pokemon)
 
   const handleSearchValue = (e) => {
     setValue(e.target.value);
@@ -12,7 +14,10 @@ const Nav = ({onSearch}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch(value);
+    const pokemon = allPokemon.find(el => el.name === value)
+    pokemon?
+    onSearch(value):
+    alert("No existe pokemon")
     setValue("")
   };
 

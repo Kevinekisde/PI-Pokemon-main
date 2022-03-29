@@ -1,0 +1,70 @@
+.container{
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
+    background-color: white;
+}
+
+.error{
+    position: absolute;
+    width: 300px;
+    height: 144.22px;
+    left: 143px;
+    top: 145px;
+
+}
+.text{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 300px;
+    left: 143px;
+    gap: 20px;
+}
+
+.ops{
+   color: rgba(90, 177, 186, 1);
+   font-size:60px;
+}
+
+.span{
+    position: absolute; 
+    top: 110px;
+}
+
+.button{
+    font-size: 18px;
+    color: white;
+    position: absolute;
+    top: 550px;
+    left: 240px;
+    width: 380px;
+    height: 64px;
+    background-color:#5cb0ba;
+    border: none;
+    border-radius:20px;
+    cursor: pointer;
+    transition: 0.8s;
+}
+
+.button:hover{
+    color: black;
+}
+
+
+.snorlax{
+position: absolute;
+width: 700px;
+height: 649.92px;
+left: 770px;
+top: 60px;
+animation: ilustrationAnimate ease-in 1s infinite alternate;
+}
+
+@keyframes ilustrationAnimate{
+    0%{
+        transform: scale(1);
+    }100%{
+        transform: scale(1.04);
+    }
+}

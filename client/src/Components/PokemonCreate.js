@@ -7,22 +7,23 @@ import s from './styles/PokemonCreate.module.css'
 function validate(input) {
 
     const reg = new RegExp('^[0-9]+$');
+
     let errors = {};
-    if (!input.name || input.name.match(reg) || input.name.length < 3) {
-        errors.name = "Se requiere un nombre valido 3 caracteres"
-    } else if (!input.hp || !input.hp.match(reg) || input.hp.length > 2) {
-        errors.hp = "Se requiere un valor numerico de vida"
-    } else if (!input.attack || !input.attack.match(reg) || input.attack.length > 2) {
+    if (!input.name || input.name.match(reg) || input.name.length < 3 || input.name.includes(" ")) {
+        errors.name = "Se requiere un nombre valido 3 caracteres y sin espacios"
+    } else if (!input.hp || !input.hp.match(reg) || input.hp.length > 2 || input.hp.includes(" ")) {
+        errors.hp = "Se requiere un valor numerico de vida no mayor a 99"
+    } else if (!input.attack || !input.attack.match(reg) || input.attack.length > 2 || input.attack.includes(" ")) {
         errors.attack = "hace falta un valor numerico de ataque no mayor a 99"
-    } else if (!input.defense || !input.defense.match(reg) || input.defense.length > 2) {
+    } else if (!input.defense || !input.defense.match(reg) || input.defense.length > 2 || input.defense.includes(" ")) {
         errors.defense = "hace falta un valor numerico de defensa"
-    } else if (!input.speed || !input.speed.match(reg) || !input.speed.length > 2) {
+    } else if (!input.speed || !input.speed.match(reg) || !input.speed.length > 2 || input.speed.includes(" ")) {
         errors.speed = "hace falta un valor numerico de velocidad no mayor a 99"
-    } else if (!input.weight || !input.weight.match(reg) || !input.weight.length > 2) {
+    } else if (!input.weight || !input.weight.match(reg) || !input.weight.length > 2 || input.weight.includes(" ")) {
         errors.weight = "hace falta un valor numerico de Peso no mayor a 99"
-    } else if (!input.height || !input.height.match(reg) || input.height.length > 2) {
+    } else if (!input.height || !input.height.match(reg) || input.height.length > 2 || input.height.includes(" ")) {
         errors.height = "hace falta un valor numerico de Altura no mayor a 99"
-    }
+    }else if (!input.types < 0)
 
     if (errors.hp || errors.name || errors.attack || errors.defense || errors.speed || errors.weight || errors.height) {
         const button = document.getElementById("Button")
