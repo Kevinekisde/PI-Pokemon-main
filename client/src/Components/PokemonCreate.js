@@ -17,9 +17,9 @@ function validate(input) {
         errors.attack = "hace falta un valor numerico de ataque no mayor a 99"
     } else if (!input.defense || !input.defense.match(reg) || input.defense.length > 2 || input.defense.includes(" ")) {
         errors.defense = "hace falta un valor numerico de defensa"
-    } else if (!input.speed || !input.speed.match(reg) || !input.speed.length > 2 || input.speed.includes(" ")) {
+    } else if (!input.speed || !input.speed.match(reg) || input.speed.length > 2 || input.speed.includes(" ")) {
         errors.speed = "hace falta un valor numerico de velocidad no mayor a 99"
-    } else if (!input.weight || !input.weight.match(reg) || !input.weight.length > 2 || input.weight.includes(" ")) {
+    } else if (!input.weight || !input.weight.match(reg) || input.weight.length > 2 || input.weight.includes(" ")) {
         errors.weight = "hace falta un valor numerico de Peso no mayor a 99"
     } else if (!input.height || !input.height.match(reg) || input.height.length > 2 || input.height.includes(" ")) {
         errors.height = "hace falta un valor numerico de Altura no mayor a 99"
