@@ -18,16 +18,17 @@ const Details = () => {
     return (
         <div className={s.container}>
             {
-              myPokemon.length > 0 ?
+                myPokemon.length > 0 ?
                     <div className={s.card}>
                         <Link to="/home"><button className={s.button}>Volver</button></Link>
                         <div className={s.textimg}>
                             <h1>{myPokemon[0].name}</h1>
                             <h2>Id: {myPokemon[0].id} </h2>
-                            <img src={myPokemon[0].img ? myPokemon[0].img : myPokemon[0].image} onError={({ currentTarget }) => {
-                                currentTarget.onerror = null; // prevents looping
-                                currentTarget.src = "https://i.ytimg.com/vi/PkgfWU08_WU/mqdefault.jpg";
-                            }} alt="" />
+                            <img src={myPokemon[0].img ? myPokemon[0].img : myPokemon[0].image}
+                                onError={({ currentTarget }) => {
+                                    currentTarget.onerror = null; // prevents looping
+                                    currentTarget.src = "https://i.ytimg.com/vi/PkgfWU08_WU/mqdefault.jpg";
+                                }} alt="" />
                         </div>
                         <div className={s.stats}>
                             <h2>Hp: {myPokemon[0].hp}</h2>

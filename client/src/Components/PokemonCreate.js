@@ -23,7 +23,7 @@ function validate(input) {
         errors.weight = "hace falta un valor numerico de Peso no mayor a 99"
     } else if (!input.height || !input.height.match(reg) || input.height.length > 2 || input.height.includes(" ")) {
         errors.height = "hace falta un valor numerico de Altura no mayor a 99"
-    }else if (!input.types < 0)
+    }
 
     if (errors.hp || errors.name || errors.attack || errors.defense || errors.speed || errors.weight || errors.height) {
         const button = document.getElementById("Button")

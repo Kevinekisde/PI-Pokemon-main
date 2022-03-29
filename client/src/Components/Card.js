@@ -15,9 +15,9 @@ const Card = ({ name, img, types, id, createdInDb }) => {
         <Link to={`/home/${id}`}>
           <div className={Classes.img}>
             <img src={img} onError={({ currentTarget }) => {
-    currentTarget.onerror = null; // prevents looping
-    currentTarget.src="https://i.ytimg.com/vi/PkgfWU08_WU/mqdefault.jpg";
-  }} alt="Pokemon"/>
+              currentTarget.onerror = null; // prevents looping
+              currentTarget.src = "https://i.ytimg.com/vi/PkgfWU08_WU/mqdefault.jpg";
+            }} alt="Pokemon" />
           </div>
         </Link>
 
