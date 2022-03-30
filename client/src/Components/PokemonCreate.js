@@ -61,6 +61,7 @@ const PokemonCreate = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if(input.types.length > 2 || input.types.length === 0){
+            
             alert("Porfavor selecciona de 1 a 2 tipos")   
         }else{
             dispatch(postPokemon(input))
