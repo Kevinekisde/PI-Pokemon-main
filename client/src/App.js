@@ -17,7 +17,6 @@ function App() {
         <Route path="/home/:id" element={<Details></Details>}></Route>
         <Route path="*" element={<Error404></Error404>}></Route>
         <Route path="/error" element={<Error404></Error404>}></Route>
-
       </Routes>
     
     </BrowserRouter>

@@ -23,9 +23,11 @@ function validate(input) {
         errors.weight = "hace falta un valor numerico de Peso no mayor a 99"
     } else if (!input.height || !input.height.match(reg) || input.height.length > 2 || input.height.includes(" ")) {
         errors.height = "hace falta un valor numerico de Altura no mayor a 99"
+    }else if (!input.img){
+        errors.img = "hace falta una foto"
     }
 
-    if (errors.hp || errors.name || errors.attack || errors.defense || errors.speed || errors.weight || errors.height) {
+    if (errors.hp || errors.name || errors.attack || errors.defense || errors.speed || errors.weight || errors.height || errors.img || errors.types) {
         const button = document.getElementById("Button")
         button.disabled = true;
     } else {
@@ -47,7 +49,8 @@ const PokemonCreate = () => {
         speed: "",
         weight: "",
         height: "",
-        types: []
+        types: [],
+        img:""
     })
 
     useEffect(() => {
@@ -55,24 +58,25 @@ const PokemonCreate = () => {
     }, [dispatch])
 
 
-
-
-
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(postPokemon(input))
-        alert("Personaje creado")
-
-        setInput({
-            name: "",
-            hp: "",
-            attack: "",
-            defense: "",
-            speed: "",
-            weight: "",
-            height: "",
-            types: []
-        })
+        if(input.types.length > 2 || input.types.length === 0){
+            alert("Porfavor selecciona de 1 a 2 tipos")   
+        }else{
+            dispatch(postPokemon(input))
+            alert("Personaje creado")
+            setInput({
+                name: "",
+                hp: "",
+                attack: "",
+                defense: "",
+                speed: "",
+                weight: "",
+                height: "",
+                types: [],
+                img:""
+            })
+        }
     }
 
     const handleChange = (e) => {
@@ -85,12 +89,11 @@ const PokemonCreate = () => {
             [e.target.name]: e.target.value,
         }))
     }
-
     const handleSelect = (e) => {
-
+        
         setInput({
             ...input,
-            types: [...input.types, e.target.value]
+            types: [...input.types, e.target.value] 
         })
         setErrors(validate({
             ...input,
@@ -115,12 +118,13 @@ const PokemonCreate = () => {
                 <form className={s.form} onSubmit={(e) => handleSubmit(e)}>
                     <h1>Crea tu Pokemon</h1>
                     <div>
-                        <label>Nombre: </label>
+                        <label htmlFor='name'>Name:</label>
                         <input
                             className={s.input}
                             type="text"
                             value={input.name}
                             name="name"
+                            id='name'
                             onChange={handleChange}
                         />
                         {
@@ -130,7 +134,7 @@ const PokemonCreate = () => {
                         }
                     </div>
                     <div>
-                        <label>Puntos de Vida: </label>
+                        <label htmlFor='life'>Puntos de Vida: </label>
                         <input
                             className={s.input}
                             type="text"
@@ -234,9 +238,14 @@ const PokemonCreate = () => {
                             name="img"
                             onChange={handleChange}
                         />
+                        {
+                            errors.img && (
+                                <p className="error">{errors.img}</p>
+                            )
+                        }
                     </div>
-                    <h2>Elige El Tipo: </h2>
-                    <select id="Select" onChange={handleSelect}>
+                    <h2>Selecciona de 1 a 2 tipos: </h2>
+                    <select id="Select"  onChange={handleSelect}>
                         {
                             types.map((type) => (
                                 <option value={type.name}>{type.name}</option>
@@ -251,7 +260,7 @@ const PokemonCreate = () => {
                             <p className="error">{errors.select}</p>
                         )
                     }
-                    <button disabled="true" id='Button' type="submit">Crear Pokemon</button>
+                    <button disabled={true} id='Button' type="submit">Crear Pokemon</button>
                 </form>
                 <div className={s.types}>
                     <h1>Tipos seleccionados</h1>
