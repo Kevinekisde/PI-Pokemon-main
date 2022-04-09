@@ -59,6 +59,24 @@ export function getDetail(id){
 }
 
 
+export function editPokemon(id, data){
+    return async function (dispatch) {
+      await axios.put(`/pokemons/${id}`,data)
+      return dispatch({
+        type: 'UPDATE_POKEMON'
+      })
+    }
+}
+export function deletePokemon(id) {
+  return async function (dispatch) {
+    await axios.delete(`/pokemons/${id}`)
+    return dispatch({
+      type: 'DELETE_POKEMON'
+    })
+  }
+}
+
+
 
 
 export function filterCreated(payload){

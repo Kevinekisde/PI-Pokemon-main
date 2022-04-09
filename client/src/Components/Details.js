@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail } from "../actions/index"
+import { getDetail,deletePokemon } from "../actions/index"
 import { useEffect } from "react";
 import s from './styles/Details.module.css'
 
@@ -10,10 +10,16 @@ import s from './styles/Details.module.css'
 const Details = () => {
     let { id } = useParams()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     useEffect(() => {
         dispatch(getDetail(id))
     }, [dispatch, id])
 
+    const handleDelete = () =>{
+        dispatch(deletePokemon(id))
+        navigate('/home')
+    }
     const myPokemon = useSelector((state) => state.detail)
     return (
         <div className={s.container}>
@@ -21,6 +27,8 @@ const Details = () => {
                 myPokemon.length > 0 ?
                     <div className={s.card}>
                         <Link to="/home"><button className={s.button}>Volver</button></Link>
+                        <Link to={`/home/update/${id}`}><button className={s.buttons}>Editar Nombre</button></Link>
+                        <button onClick={handleDelete}>Borrar Pokemon</button>
                         <div className={s.textimg}>
                             <h1>{myPokemon[0].name}</h1>
                             <h2>Id: {myPokemon[0].id} </h2>

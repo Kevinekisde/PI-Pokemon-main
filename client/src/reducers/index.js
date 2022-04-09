@@ -40,6 +40,15 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         detail: action.payload
       }
+    case "UPDATE_POKEMON":
+      return {
+        ...state
+      }
+
+    case "DELETE_POKEMON":
+      return {
+        ...state
+      }
     case 'FILTER_CREATED':
 
       const allPokemon = state.allPokemon
@@ -61,8 +70,8 @@ const rootReducer = (state = initialState, action) => {
           return 0
 
         })
-      }else if (action.payload === "des") {
-       sortedArr = state.pokemon.sort(function (a, b) {
+      } else if (action.payload === "des") {
+        sortedArr = state.pokemon.sort(function (a, b) {
           if (a.name.toLowerCase() > b.name.toLowerCase()) {
             return -1
           }
@@ -71,8 +80,8 @@ const rootReducer = (state = initialState, action) => {
           }
           return 0
         })
-      }else{
-        return{
+      } else {
+        return {
           ...state
         }
       }
@@ -82,31 +91,31 @@ const rootReducer = (state = initialState, action) => {
       }
     case 'ORDER_BY_ATTACK':
       let attackSort
-       if(action.payload === 'mayorToMinus'){
-         attackSort = state.pokemon.sort(function (a, b) {
-           if (a.attack > b.attack) {
-             return 1
-           }
-           if (b.attack > a.attack) {
-             return -1
-           }
-           return 0
-         }) 
-       }else if(action.payload === "minusToMayus"){
-         attackSort = state.pokemon.sort(function (a, b) {
-           if (a.attack > b.attack) {
-             return -1
-           }
-           if (b.attack > a.attack) {
-             return 1
-           }
-           return 0
-         })
-       }else{
-         return{
-           ...state
-         }
-       }
+      if (action.payload === 'mayorToMinus') {
+        attackSort = state.pokemon.sort(function (a, b) {
+          if (a.attack > b.attack) {
+            return 1
+          }
+          if (b.attack > a.attack) {
+            return -1
+          }
+          return 0
+        })
+      } else if (action.payload === "minusToMayus") {
+        attackSort = state.pokemon.sort(function (a, b) {
+          if (a.attack > b.attack) {
+            return -1
+          }
+          if (b.attack > a.attack) {
+            return 1
+          }
+          return 0
+        })
+      } else {
+        return {
+          ...state
+        }
+      }
       return {
         ...state,
         pokemon: attackSort

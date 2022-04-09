@@ -10,36 +10,77 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-const getApiInfo = async () => {
+// const getApiInfo = async () => {
 
+//     try {
+//         const apiInfo = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=40");
+//         const promises = apiInfo.data.results.map((p) => axios.get(p.url));
+//         const pokePromises = await axios.all(promises);
+//         const pokemon = pokePromises.map((p) => {
+//             return {
+//                 id: p.data.id,
+//                 name: p.data.name,
+//                 height: p.data.height,
+//                 hp: p.data.stats[0].base_stat,
+//                 attack: p.data.stats[1].base_stat,
+//                 defense: p.data.stats[2].base_stat,
+//                 speed: p.data.stats[5].base_stat,
+//                 weight: p.data.weight,
+//                 types: p.data.types.map((e) => e.type.name),
+//                 img: p.data.sprites.versions["generation-v"]["black-white"].animated
+//                     .front_default,
+//                 backImg:
+//                     p.data.sprites.versions["generation-v"]["black-white"].animated
+//                         .back_default,
+//             };
+//         });
+//         return pokemon;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+const getApiInfo = new Promise((resolve, reject) => {
     try {
-        const apiInfo = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=40");
-        const promises = apiInfo.data.results.map((p) => axios.get(p.url));
-        const pokePromises = await axios.all(promises);
-        const pokemon = pokePromises.map((p) => {
-          return {
-            id: p.data.id,
-            name: p.data.name,
-            height: p.data.height,
-            hp: p.data.stats[0].base_stat,
-            attack: p.data.stats[1].base_stat,
-            defense: p.data.stats[2].base_stat,
-            speed: p.data.stats[5].base_stat,
-            weight: p.data.weight,
-            types: p.data.types.map((e) => e.type.name),
-            img: p.data.sprites.versions["generation-v"]["black-white"].animated
-              .front_default,
-            backImg:
-              p.data.sprites.versions["generation-v"]["black-white"].animated
-                .back_default,
-          };
-        });
-        return pokemon;
-      } catch (error) {
-        console.log(error);
-      }
-}
+        axios.get("https://pokeapi.co/api/v2/pokemon?limit=40")
+            .then((response) => {
+                const promises = response.data.results.map((p) => axios.get(p.url))
+                return promises
+            })
+            .then((response) => {
+                const poke = axios.all(response)
+                return poke
+            })
+            .then(poke => {
+                const pokemon = poke.map((p) => {
+                    return {
+                        id: p.data.id,
+                        name: p.data.name,
+                        height: p.data.height,
+                        hp: p.data.stats[0].base_stat,
+                        attack: p.data.stats[1].base_stat,
+                        defense: p.data.stats[2].base_stat,
+                        speed: p.data.stats[5].base_stat,
+                        weight: p.data.weight,
+                        types: p.data.types.map((e) => e.type.name),
+                        img: p.data.sprites.versions["generation-v"]["black-white"].animated
+                            .front_default,
+                        backImg:
+                            p.data.sprites.versions["generation-v"]["black-white"].animated
+                                .back_default,
+                    };
+                });
+                return pokemon
 
+            })
+            .then(data => {
+                resolve(data)
+            })
+
+
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 const getDbInfo = async () => {
 
@@ -47,8 +88,8 @@ const getDbInfo = async () => {
         include: {
             model: Type,
             attributes: ['name'],
-            through:{
-                attributes:[]
+            through: {
+                attributes: []
             }
         },
     });
@@ -56,7 +97,7 @@ const getDbInfo = async () => {
 }
 
 const getAllPokemons = async () => {
-    let apiInfo = await getApiInfo()
+    let apiInfo =await getApiInfo
     let dbInfo = await getDbInfo()
     let totalInfo = apiInfo.concat(dbInfo)
     return totalInfo
@@ -78,6 +119,7 @@ const saveTypes = async () => {
     }
 };
 
+
 const getTypesFromDB = async () => {
     try {
         let typesFromDB = await Type.findAll();
@@ -98,7 +140,7 @@ router.get('/pokemons', async (req, res) => {
         pokemonName.length ?
             res.status(200).send(pokemonName) :
             res.status(404).send("No existe pokemon")
-    }else{
+    } else {
         res.status(200).send(pokemonTotal)
     }
 })
@@ -111,10 +153,40 @@ router.get('/pokemons/:id', async (req, res) => {
         let pokemonId = await pokemonTotal.filter(el => el.id == id)
         pokemonId.length ?
             res.status(200).send(pokemonId) :
-            res.redirect(404,"/error")
+            res.redirect(404, "/error")
     } else {
         res.status(200).send(pokemonTotal)
     }
+})
+
+router.put('/pokemons/:id', async(req, res) =>{
+    try {
+        const {id} = req.params
+        let pokemonUpdate = await Pokemon.findOne({
+            where: {id: id}
+        })
+        await pokemonUpdate.update({
+            name:req.body.name
+        })
+        res.status(200).send(pokemonUpdate)
+    }catch (err) {
+        console.error(err)
+    }
+})
+
+
+router.delete('/pokemons/:id',async (req, res) => {
+    try {
+        const{id}= req.params;
+        let pokemonToDelete = await Pokemon.findByPk(id);
+        if (pokemonToDelete) {
+          await pokemonToDelete.destroy();
+          return res.send("Pokemon deleted!");
+        }
+        res.status(404).send("Pokemon not found.");
+      } catch (error) {
+        res.status(400).send(error);
+      }
 })
 
 
@@ -136,6 +208,7 @@ router.get('/types', async (req, res) => {
     }
 
 })
+
 
 
 router.post('/pokemons', async (req, res) => {
@@ -164,7 +237,7 @@ router.post('/pokemons', async (req, res) => {
             img,
         });
 
-        let typesIndb = await Type.findAll({where:{name:types}})
+        let typesIndb = await Type.findAll({ where: { name: types } })
         newPokemon.addType(typesIndb)
         res.status(200).send("Personaje creado con exito")
 
