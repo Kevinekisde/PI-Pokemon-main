@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { postPokemon, getTypes } from '../actions'
+import { postPokemon, getTypes, getPokemon } from '../actions'
 import { useDispatch, useSelector } from 'react-redux'
 import s from './styles/PokemonCreate.module.css'
 
@@ -40,6 +40,7 @@ function validate(input) {
 const PokemonCreate = () => {
     const dispatch = useDispatch()
     const types = useSelector((state) => state.types)
+    const Pokemon = useSelector((state) => state.allPokemon)
     const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
         name: "",
@@ -54,6 +55,7 @@ const PokemonCreate = () => {
     })
 
     useEffect(() => {
+        dispatch(getPokemon())
         dispatch(getTypes())
     }, [dispatch])
 
@@ -61,9 +63,11 @@ const PokemonCreate = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if(input.types.length > 2 || input.types.length === 0){
-            
             alert("Porfavor selecciona de 1 a 2 tipos")   
-        }else{
+        }else if(Pokemon.find(el => el.name.toLowerCase() === input.name.toLowerCase())){
+            alert("El pokemon ya existe")
+        }
+        else{
             dispatch(postPokemon(input))
             alert("Personaje creado")
             setInput({
@@ -95,7 +99,7 @@ const PokemonCreate = () => {
         setInput({
             ...input,
             types: [...input.types, e.target.value] 
-        })
+        })  
         setErrors(validate({
             ...input,
             [e.target.name]: e.target.value,

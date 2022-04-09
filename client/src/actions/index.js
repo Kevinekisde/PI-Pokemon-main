@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getPokemon = () => {
+export const getPokemon = (dispatch) => {
   return async function (dispatch) {
     const pokemon = await axios.get("/pokemons");
     return dispatch({
@@ -8,8 +8,7 @@ export const getPokemon = () => {
       payload: pokemon.data,
     });
   };
-};
-
+}
 
 
 export const getTypes = () => {
@@ -25,7 +24,7 @@ export const getTypes = () => {
 
 export function postPokemon(payload) {
   return async function (dispatch) {
-    const json = await axios.post("/pokemons" ,payload);
+    const json = await axios.post("/pokemons", payload);
     return json
   }
 }
@@ -38,24 +37,24 @@ export const searchPokemon = (name) => {
   };
 };
 
-export function getDetail(id){
-  return async function(dispatch){
-      try{
-          var json = await axios.get(`/pokemons/${id}`)
-          return dispatch({
-              type: 'GET_DETAILS',
-              payload: json.data,
-              
-          })
-      }catch(error){
-        const err = error 
-        if (err.response) {
-           console.log(err.response.status)
-           console.log(err.response.data)
-           window.location.replace("/error")
+export function getDetail(id) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get(`/pokemons/${id}`)
+      return dispatch({
+        type: 'GET_DETAILS',
+        payload: json.data,
+
+      })
+    } catch (error) {
+      const err = error
+      if (err.response) {
+        console.log(err.response.status)
+        console.log(err.response.data)
+        window.location.replace("/error")
       }
+    }
   }
-}
 }
 
 
@@ -79,23 +78,23 @@ export function deletePokemon(id) {
 
 
 
-export function filterCreated(payload){
+export function filterCreated(payload) {
   return {
-      type: 'FILTER_CREATED',
-      payload
+    type: 'FILTER_CREATED',
+    payload
   }
 }
 
-export function orderByName(payload){
-  return{
-      type: 'ORDER_BY_NAME',
-      payload
+export function orderByName(payload) {
+  return {
+    type: 'ORDER_BY_NAME',
+    payload
   }
 }
 
 
-export function orderByAttack(payload){
-  return{
+export function orderByAttack(payload) {
+  return {
     type: 'ORDER_BY_ATTACK',
     payload
   }
